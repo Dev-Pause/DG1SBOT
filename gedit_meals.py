@@ -3,9 +3,9 @@ import requests
 
 app = Flask(__name__)
 
-# 정보를 가져오는 함수
+# 정보 가져오기
 def fetch_meal_info():
-    # 정보를 가져오기 위한 API 엔드포인트 및 파라미터 설정
+    # API 엔드포인트 및 파라미터 설정
     url = "https://open.neis.go.kr/hub/mealServiceDietInfo"
     service_key = "c9d9e1cde8b54de786c94fcc0e5eae36"
     params = {
@@ -33,11 +33,13 @@ def fetch_meal_info():
 
 @app.route('/get_meal')
 def get_meal():
-    # 정보를 가져오는 함수를 호출합니다.
+    
+    # 정보를 가져오는 함수 호출
     meal_info = fetch_meal_info()
 
-    # 정보를 JSON 형식으로 반환합니다.
+    # 가져온 정보를 JSON 형식으로 리턴
     return jsonify(meal_info)
 
-if __name__ == '__main__':
-    app.run(port=8000)
+# 패키징을 따로 진행하니 삭제하고 Procfile로 대체
+#if __name__ == '__main__':
+    #app.run(port=8000)
