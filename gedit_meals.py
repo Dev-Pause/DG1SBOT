@@ -31,24 +31,15 @@ def fetch_meal_info():
     except Exception as e:
         return {"error": str(e)}
 
-@app.route('/get_meal', methods=['POST'])
+@app.route('/get_meal')
 def get_meal():
     
     # 정보를 가져오는 함수 호출
     meal_info = fetch_meal_info()
 
     # 가져온 정보를 JSON 형식으로 리턴
-    response = {
-        "version": "2.0",
-        "template": {
-            "outputs": [
-                {
-                    "simpleText": {
-                        "text": "\n".join(meal_info)  # menu_items는 메뉴 리스트
-                    }
-                }
-            ]
-        }
-    }
+    return jsonify(meal_info)
 
-    return jsonify(response)
+# 패키징을 따로 진행하니 삭제하고 Procfile로 대체
+#if __name__ == '__main__':
+    #app.run(port=8000)
