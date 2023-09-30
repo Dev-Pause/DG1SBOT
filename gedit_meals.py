@@ -31,7 +31,8 @@ def fetch_meal_info():
     except Exception as e:
          return {"error": str(e)}
 
-@app.route('/get_meal', method=['POST'])
+
+@app.route('/get_meal', methods=['POST'])
 def get_meal():
     
     # 정보를 가져오는 함수 호출
