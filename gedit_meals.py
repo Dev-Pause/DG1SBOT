@@ -29,17 +29,29 @@ def fetch_meal_info():
         else:
             return {"error": "Failed to fetch meal information."}
     except Exception as e:
-        return {"error": str(e)}
+         return {"error": str(e)}
 
 @app.route('/get_meal')
 def get_meal():
     
-    # 정보를 가져오는 함수 호출
-    meal_info = fetch_meal_info()
+     # 정보를 가져오는 함수 호출
+     meal_info = fetch_meal_info()
 
-    # 가져온 정보를 JSON 형식으로 리턴
-    return jsonify(meal_info)
+     # 메뉴 이름이 담긴 리스트를 개행 문자로 연결하여 하나의 문자열로 만듦.
+     menu_str = "\n".join(meal_info["menu"])
 
-# 패키징을 따로 진행하니 삭제하고 Procfile로 대체
-#if __name__ == '__main__':
-    #app.run(port=8000)
+     # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
+     response_json ={
+          "version": "2.0",
+          "template":{
+               "outputs":[
+                    {
+                         "simpleText":{
+                              "text": menu_str   # 메뉴 이름이 담긴 문자열을 여기에 넣음.
+                         }
+                    }
+               ]
+          }
+     }
+
+     return jsonify(response_json)   # 생성한 JSON 응답 반환.
