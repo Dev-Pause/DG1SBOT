@@ -38,8 +38,17 @@ def get_meal():
     meal_info = fetch_meal_info()
 
     # 가져온 정보를 JSON 형식으로 리턴
-    return jsonify(meal_info)
+    response = {
+        "version": "2.0",
+        "template": {
+            "outputs": [
+                {
+                    "simpleText": {
+                        "text": "\n".join(meal_info)  # menu_items는 메뉴 리스트
+                    }
+                }
+            ]
+        }
+    }
 
-# 패키징을 따로 진행하니 삭제하고 Procfile로 대체
-#if __name__ == '__main__':
-    #app.run(port=8000)
+    return jsonify(response)
