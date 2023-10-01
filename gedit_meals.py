@@ -10,14 +10,6 @@ def fetch_meal_info():
     #오늘 날짜 구하기
     today = date.today().strftime("%Y%m%d")
     
-    # 식사 유형에 따른 파라미터 설정
-    if meal_type == "breakfast":
-        meal_code = 1
-    elif meal_type == "lunch":
-        meal_code = 2
-    elif meal_type == "dinner":
-        meal_code = 3
-    
     # API 엔드포인트 및 파라미터 설정
     url = "https://open.neis.go.kr/hub/mealServiceDietInfo"
     service_key = "c9d9e1cde8b54de786c94fcc0e5eae36"
@@ -29,7 +21,7 @@ def fetch_meal_info():
         'ATPT_OFCDC_SC_CODE': 'D10',
         'SD_SCHUL_CODE': '7240331',
         'MLSV_YMD': today, 
-        'MMEAL_SC_CODE': meal_code
+        'MMEAL_SC_CODE': '2'
     }
 
     try:
@@ -47,11 +39,9 @@ def fetch_meal_info():
 
 @app.route('/get_meal', methods=['POST'])
 def get_meal():
-    request_data = requests.json()
-    meal_type = request_data['action']['params']['meal_type']
     
     # 정보를 가져오는 함수 호출
-    meal_info = fetch_meal_info(meal_type)
+    meal_info = fetch_meal_info()
     
     if "error" in meal_info:
         # 에러 메시지가 있는 경우
@@ -62,7 +52,7 @@ def get_meal():
                 "outputs":[ 
                     {
                         "simpleText" : {
-                            "text" : "오늘은 급식이 없습니다"   
+                            "text" : f"Error: {error_message}"   
                         }
                     }
                 ]
