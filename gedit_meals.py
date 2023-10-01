@@ -70,7 +70,7 @@ def get_meal():
                 "outputs":[
                     {
                             "simpleText":{
-                                "text": menu_str   # 메뉴 이름이 담긴 문자열을 여기에 넣음.
+                                "text": today, "점심", menu_str   # 메뉴 이름이 담긴 문자열을 여기에 넣음.
                             }
                     }
                 ]

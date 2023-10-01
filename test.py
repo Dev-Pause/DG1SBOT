@@ -1,3 +1,2 @@
-meal_info = ["a", "b", "c"]
-menu_str = "\n".join(meal_info)
-print(menu_str)
+today = str(int('20070316') + 4)
+print(today+1)
