@@ -52,7 +52,7 @@ def get_meal():
                 "outputs":[ 
                     {
                         "simpleText" : {
-                            "text" : f"Error: {error_message}"   
+                            "text" : "오늘은 급식이 없습니다"   
                         }
                     }
                 ]
