@@ -1,10 +1,15 @@
 from flask import Flask, jsonify
 import requests
+from datetime import date
 
 app = Flask(__name__)
 
 # 정보 가져오기
 def fetch_meal_info():
+    
+    #오늘 날짜 구하기
+    today = date.today().strftime("%Y%m%d")
+    
     # API 엔드포인트 및 파라미터 설정
     url = "https://open.neis.go.kr/hub/mealServiceDietInfo"
     service_key = "c9d9e1cde8b54de786c94fcc0e5eae36"
@@ -15,7 +20,7 @@ def fetch_meal_info():
         'pSize': '100',
         'ATPT_OFCDC_SC_CODE': 'D10',
         'SD_SCHUL_CODE': '7240331',
-        'MLSV_YMD': '20230821', 
+        'MLSV_YMD': today, 
         'MMEAL_SC_CODE': '2'
     }
 
