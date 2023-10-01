@@ -15,7 +15,7 @@ def fetch_meal_info():
         'pSize': '100',
         'ATPT_OFCDC_SC_CODE': 'D10',
         'SD_SCHUL_CODE': '7240331',
-        'MLSV_YMD': "20230821",
+        'MLSV_YMD': "20230821", 
         'MMEAL_SC_CODE': '2'
     }
 
@@ -42,15 +42,24 @@ def get_meal():
     meal_info = fetch_meal_info()
 
     # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
-    response_json ={
-        "version": "2.0",
-        "template":{
-            "outputs":[
+    menu_strs=[
                 {
                     "simpleText":{
                         "text": menu   # 각 메뉴 이름을 여기에 넣음.
                     }
                 } for menu in meal_info["menu"]  # 각 메뉴 항목마다 simpleText 객체 생성.
+            ]
+
+    response_json ={
+        "version": "2.0",
+        "template":{
+            "outputs":[ 
+                {
+                    "carousel" : {
+                        "type" :  "basicCard",
+                        "items" : menu_strs
+                    }
+                }
             ]
         }
     }
@@ -67,7 +76,21 @@ def get_meal():
 
 
 
-'''from flask import Flask, jsonify
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+from flask import Flask, jsonify
 import requests
 
 app = Flask(__name__)
