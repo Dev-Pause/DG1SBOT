@@ -16,7 +16,7 @@ def fetch_meal_info():
         'ATPT_OFCDC_SC_CODE': 'D10',
         'SD_SCHUL_CODE': '7240331',
         'MLSV_YMD': "20230821", 
-        'MMEAL_SC_CODE': '2'
+         MMEAL_SC_CODE: 2
     }
 
     try:
@@ -41,30 +41,32 @@ def get_meal():
     # 정보를 가져오는 함수 호출
     meal_info = fetch_meal_info()
 
-    # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
+    # 각 메뉴 항목마다 simpleText 객체 생성.
     menu_strs=[
                 {
                     "simpleText":{
                         "text": menu   # 각 메뉴 이름을 여기에 넣음.
                     }
-                } for menu in meal_info["menu"]  # 각 메뉴 항목마다 simpleText 객체 생성.
+                } for menu in meal_info["menu"]
             ]
 
+    # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
     response_json ={
         "version": "2.0",
         "template":{
             "outputs":[ 
                 {
-                        "carousel" : {
-                            "type" :  "basicCard",
-                            "items" : menu_strs
-                        }
+                    "carousel" : {
+                        "type" :  "basicCard",
+                        **"items"**: menu_strs   # items 키워드 수정함.
+                    }
                 }
             ]
         }
     }
 
     return jsonify(response_json)   # 생성한 JSON 응답 반환.
+
 
 
 
