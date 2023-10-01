@@ -47,7 +47,7 @@ def fetch_meal_info():
 
 @app.route('/get_meal', methods=['POST'])
 def get_meal():
-    request_data = requests.get_json()
+    request_data = request.get_json()
     meal_type = request_data['action']['params']['meal_type']
     
     # 정보를 가져오는 함수 호출
