@@ -55,10 +55,10 @@ def get_meal():
         "template":{
             "outputs":[ 
                 {
-                    "carousel" : {
-                        "type" :  "basicCard",
-                        "items" : menu_strs
-                    }
+                        "carousel" : {
+                            "type" :  "basicCard",
+                            "items" : menu_strs
+                        }
                 }
             ]
         }
