@@ -41,9 +41,10 @@ def fetch_meal_info():
 
 @app.route('/get_meal', methods=['POST'])
 def get_meal():
+    meal_info = fetch_meal_info()
     
     
-    if "error" in "menu":
+    if "error" in meal_info :
         # 에러 메시지가 있는 경우
         response_json ={
             "version": "2.0",
