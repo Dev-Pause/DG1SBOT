@@ -52,7 +52,7 @@ def fetch_meal_info(meal_code):
 @app.route('/get_meal', methods=['POST'])
 
 def get_meal():
-    meal_code = request.form.get('meal_code')  # 'meal_code'에 해당하는 값 가져오기
+    meal_code = request.json.get('meal_code')  # 'meal_code'에 해당하는 값 가져오기
     
     if meal_code is None:
         response_json ={
