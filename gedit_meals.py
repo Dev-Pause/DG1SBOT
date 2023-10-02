@@ -4,7 +4,6 @@
 from flask import Flask, jsonify, request
 import requests
 from datetime import date
-import time
 
 app = Flask(__name__)
 
@@ -86,70 +85,70 @@ def get_meal():
                     ]
                 }
             }
-            #새로운 요청에 대해 현재 시간으로 업데이트
-            request_history[ip_address] = time.time()
-            
             return jsonify(response_json)
+     
+     # 새로운 요청에 대해 현재 시간으로 업데이트
+    request_history[ip_address] = time.time()   
         
         
-        else :    
-            #meal_code = request.json.get('meal_code')  # 'meal_code'에 해당하는 값 가져오기
-            #meal_code = request.json['params']['meal_code']
-            meal_code = request.json['action']['params']['meal_code']
+        
+    #meal_code = request.json.get('meal_code')  # 'meal_code'에 해당하는 값 가져오기
+    #meal_code = request.json['params']['meal_code']
+    meal_code = request.json['action']['params']['meal_code']
 
-            
-            if meal_code is None:
-                response_json ={
-                    "version": "2.0",
-                    "template":{
-                        "outputs":[ 
-                            {
-                                "simpleText" : {
-                                    "text" : "'meal_code' parameter is missing."
-                                }
-                            }
-                        ]
+    
+    if meal_code is None:
+        response_json ={
+            "version": "2.0",
+            "template":{
+                "outputs":[ 
+                    {
+                        "simpleText" : {
+                            "text" : "'meal_code' parameter is missing."
+                        }
                     }
-                }
-                return jsonify(response_json)
-            
-            meal_info = fetch_meal_info(meal_code)
-            
-            if "error" in meal_info:
-                # 에러 메시지가 있는 경우
-                response_json ={
-                    "version": "2.0",
-                    "template":{
-                        "outputs":[ 
-                            {
-                                "simpleText" : {
-                                    "text" : "급식 정보가 없습니다"
-                                }
-                            }
-                        ]
+                ]
+            }
+        }
+        return jsonify(response_json)
+    
+    meal_info = fetch_meal_info(meal_code)
+    
+    if "error" in meal_info:
+        # 에러 메시지가 있는 경우
+        response_json ={
+            "version": "2.0",
+            "template":{
+                "outputs":[ 
+                    {
+                        "simpleText" : {
+                            "text" : "급식 정보가 없습니다"
+                        }
                     }
-                }
+                ]
+            }
+        }
 
-            else:
-                # 메뉴 이름이 담긴 리스트를 개행 문자로 연결하여 하나의 문자열로 만듦.
-                # menu_str = "\n".join(meal_info['''menu'''])
-                menu_str = "<br/>".join(meal_info['menu']).replace("<br/>", "\n")
-                
-                # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
-                response_json ={
-                    "version": "2.0",
-                    "template":{
-                        "outputs":[
-                            {
-                                "simpleText":{
-                                    "text": menu_str   # 메뉴 이름이 담긴 문자열을 여기에 넣음.
-                                }
-                            }
-                        ]
+    else:
+        # 메뉴 이름이 담긴 리스트를 개행 문자로 연결하여 하나의 문자열로 만듦.
+        # menu_str = "\n".join(meal_info['''menu'''])
+        menu_str = "<br/>".join(meal_info['menu']).replace("<br/>", "\n")
+        
+        # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
+        response_json ={
+            "version": "2.0",
+            "template":{
+                "outputs":[
+                    {
+                        "simpleText":{
+                            "text": menu_str   # 메뉴 이름이 담긴 문자열을 여기에 넣음.
+                        }
                     }
-                }
+                ]
+            }
+        }
 
-            return jsonify(response_json)   # 생성한 JSON 응답 반환.'''
+    return jsonify(response_json)   # 생성한 JSON 응답 반환.'''
 
 
 
