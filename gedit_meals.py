@@ -8,7 +8,6 @@ app = Flask(__name__)
 def fetch_meal_info():
     
     #오늘 날짜 구하기
-    #today = str(int(date.today().strftime("%Y%m%d")) + 4)
     today = date.today().strftime("%Y%m%d")
     
     # API 엔드포인트 및 파라미터 설정
@@ -39,44 +38,26 @@ def fetch_meal_info():
 
 
 @app.route('/get_meal', methods=['POST'])
-
 def get_meal():
     
     # 정보를 가져오는 함수 호출
     meal_info = fetch_meal_info()
-    
-    if "error" in meal_info:
-        # 에러 메시지가 있는 경우
-        error_message = meal_info["error"]
-        response_json ={
-            "version": "2.0",
-            "template":{
-                "outputs":[ 
-                    {
-                        "simpleText" : {
-                            "text" : " 오늘은 급식이 없습니다"
+
+    # 메뉴 이름이 담긴 리스트를 개행 문자로 연결하여 하나의 문자열로 만듦.
+    menu_str = "\n".join(meal_info["menu"])
+
+    # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
+    response_json ={
+        "version": "2.0",
+        "template":{
+            "outputs":[
+                {
+                        "simpleText":{
+                            "text": menu_str   # 메뉴 이름이 담긴 문자열을 여기에 넣음.
                         }
-                    }
-                ]
-            }
+                }
+            ]
         }
-    else:
-
-        # 메뉴 이름이 담긴 리스트를 개행 문자로 연결하여 하나의 문자열로 만듦.
-        menu_str = "\n".join(meal_info["menu"])
-
-        # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
-        response_json ={
-            "version": "2.0",
-            "template":{
-                "outputs":[
-                    {
-                            "simpleText":{
-                                "text": menu_str   # 메뉴 이름이 담긴 문자열을 여기에 넣음.
-                            }
-                    }
-                ]
-            }
-        }
+    }
 
     return jsonify(response_json)   # 생성한 JSON 응답 반환.
