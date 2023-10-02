@@ -1,4 +1,4 @@
-
+# 오늘 날짜 적용까지 가능한 완전본
 from flask import Flask, jsonify
 import requests
 from datetime import date
@@ -12,7 +12,7 @@ app = Flask(__name__)
 def fetch_meal_info():
     
     #오늘 날짜 구하기
-    today = date.today().strftime("%Y%m%d")
+    today = int(date.today().strftime("%Y%m%d"))
     
     # API 엔드포인트 및 파라미터 설정
     url = "https://open.neis.go.kr/hub/mealServiceDietInfo"
