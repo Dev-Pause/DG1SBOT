@@ -1,4 +1,4 @@
-# 여기까지가 온전본
+# 여기까지가 오늘 날짜를 반영하지 않은 온전본
 from flask import Flask, jsonify
 import requests
 from datetime import date
@@ -60,7 +60,7 @@ def get_meal():
                 "outputs":[ 
                     {
                         "simpleText" : {
-                            "text" : " 오늘은 급식이 없습니다"
+                            "text" : " 급식 정보가 없습니다"
                         }
                     }
                 ]
