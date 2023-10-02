@@ -34,34 +34,51 @@ def fetch_meal_info():
             return {"menu": meal_names}
         else:
             return {"error": "Failed to fetch meal information."}
-    
-    except Exception :
-        return {"급식정보가 없습니다"}
-    #except Exception as e:
-         #return {"error": str(e), "menu": []}
+        
+    except Exception as e:
+         return {"error": str(e)}
 
 
 @app.route('/get_meal', methods=['POST'])
 def get_meal():
     
-    # 정보를 가져오는 함수 호출
-    meal_info = fetch_meal_info()
-
-    # 메뉴 이름이 담긴 리스트를 개행 문자로 연결하여 하나의 문자열로 만듦.
-    menu_str = "\n".join(meal_info["menu"])
-
-    # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
-    response_json ={
-        "version": "2.0",
-        "template":{
-            "outputs":[
-                {
-                        "simpleText":{
-                            "text": menu_str   # 메뉴 이름이 담긴 문자열을 여기에 넣음.
+    
+    if "error" in meal_info:
+        # 에러 메시지가 있는 경우
+        error_message = meal_info["error"]
+        response_json ={
+            "version": "2.0",
+            "template":{
+                "outputs":[ 
+                    {
+                        "simpleText" : {
+                            "text" : " 오늘은 급식이 없습니다"
                         }
-                }
-            ]
+                    }
+                ]
+            }
         }
-    }
+
+    else:
+        
+        # 정보를 가져오는 함수 호출
+        meal_info = fetch_meal_info()
+
+        # 메뉴 이름이 담긴 리스트를 개행 문자로 연결하여 하나의 문자열로 만듦.
+        menu_str = "\n".join(meal_info["menu"])
+
+        # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
+        response_json ={
+            "version": "2.0",
+            "template":{
+                "outputs":[
+                    {
+                            "simpleText":{
+                                "text": menu_str   # 메뉴 이름이 담긴 문자열을 여기에 넣음.
+                            }
+                    }
+                ]
+            }
+        }
 
     return jsonify(response_json)   # 생성한 JSON 응답 반환.
