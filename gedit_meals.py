@@ -40,17 +40,15 @@ def fetch_meal_info(mealname):
 
 @app.route('/get_breakfast', methods=['POST'])
 def get_breakfast() :
-    get_meal('1')
+    return get_meal('1')
     
 @app.route('/get_lunch', methods=['POST'])
 def get_lunch() :
-    get_meal('2')
+    return get_meal('2')
     
 @app.route('/get_dinner', methods=['POST'])
 def get_dinner() :
-    get_meal('3')
-
-
+    return get_meal('3')
 
 
 def get_meal(mealname):
