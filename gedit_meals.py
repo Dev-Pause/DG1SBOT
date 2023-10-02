@@ -104,7 +104,7 @@ def get_meal():
             }
         }
 
-    return jsonify(response_json)   # 생성한 JSON 응답 반환.
+        return jsonify(response_json)   # 생성한 JSON 응답 반환.
 
 
 
