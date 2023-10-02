@@ -43,9 +43,8 @@ def fetch_meal_info():
 def get_meal():
     
     
-    if "error" in meal_info:
+    if "error" in "menu":
         # 에러 메시지가 있는 경우
-        error_message = meal_info["error"]
         response_json ={
             "version": "2.0",
             "template":{
