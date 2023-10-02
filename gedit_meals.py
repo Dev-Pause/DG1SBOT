@@ -53,7 +53,7 @@ def get_meal():
                 "outputs":[ 
                     {
                         "simpleText" : {
-                            "text" : f"{today} / 오늘은 급식이 없습니다"
+                            "text" : " 오늘은 급식이 없습니다"
                         }
                     }
                 ]
