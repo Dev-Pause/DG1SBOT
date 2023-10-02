@@ -5,7 +5,7 @@ from datetime import date
 app = Flask(__name__)
 
 # 정보 가져오기
-def fetch_meal_info(mealname):
+def fetch_meal_info(mn):
     
     #오늘 날짜 구하기
     #today = str(int(date.today().strftime("%Y%m%d")) + 4)
@@ -22,7 +22,7 @@ def fetch_meal_info(mealname):
         'ATPT_OFCDC_SC_CODE': 'D10',
         'SD_SCHUL_CODE': '7240331',
         'MLSV_YMD': today, 
-        'MMEAL_SC_CODE': mealname
+        'MMEAL_SC_CODE': mn
     }
 
     try:
