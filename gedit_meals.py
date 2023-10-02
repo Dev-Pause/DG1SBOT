@@ -8,7 +8,8 @@ app = Flask(__name__)
 def fetch_meal_info():
     
     #오늘 날짜 구하기
-    today = str(int(date.today().strftime("%Y%m%d")) + 4)
+    #today = str(int(date.today().strftime("%Y%m%d")) + 4)
+    today = date.today().strftime("%Y%m%d")
     
     # API 엔드포인트 및 파라미터 설정
     url = "https://open.neis.go.kr/hub/mealServiceDietInfo"
@@ -20,7 +21,7 @@ def fetch_meal_info():
         'pSize': '100',
         'ATPT_OFCDC_SC_CODE': 'D10',
         'SD_SCHUL_CODE': '7240331',
-        'MLSV_YMD': '20231005', 
+        'MLSV_YMD': today, 
         'MMEAL_SC_CODE': '2'
     }
 
@@ -52,7 +53,7 @@ def get_meal():
                 "outputs":[ 
                     {
                         "simpleText" : {
-                            "text" : f"오늘은 급식이 없습니다"   
+                            "text" : f"{today} / 오늘은 급식이 없습니다"
                         }
                     }
                 ]
@@ -70,7 +71,7 @@ def get_meal():
                 "outputs":[
                     {
                             "simpleText":{
-                                "text": today, "점심", menu_str   # 메뉴 이름이 담긴 문자열을 여기에 넣음.
+                                "text": menu_str   # 메뉴 이름이 담긴 문자열을 여기에 넣음.
                             }
                     }
                 ]
