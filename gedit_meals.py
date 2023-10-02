@@ -12,7 +12,7 @@ app = Flask(__name__)
 def fetch_meal_info():
     
     #오늘 날짜 구하기
-    today = str(int(date.today().strftime("%Y%m%d")+3))
+    today = date.today().strftime("%Y%m%d")
     
     # API 엔드포인트 및 파라미터 설정
     url = "https://open.neis.go.kr/hub/mealServiceDietInfo"
