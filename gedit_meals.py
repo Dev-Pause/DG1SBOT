@@ -92,8 +92,9 @@ def get_meal():
 
     else:
         # 메뉴 이름이 담긴 리스트를 개행 문자로 연결하여 하나의 문자열로 만듦.
-        menu_str = "\n".join(meal_info['''menu'''])
-
+        # menu_str = "\n".join(meal_info['''menu'''])
+        menu_str = "<br/>".join(meal_info['menu']).replace("<br/>", "\n")
+        
         # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
         response_json ={
             "version": "2.0",
