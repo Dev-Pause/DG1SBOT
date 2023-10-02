@@ -14,6 +14,7 @@ def fetch_meal_info(mn):
     # API 엔드포인트 및 파라미터 설정
     url = "https://open.neis.go.kr/hub/mealServiceDietInfo"
     service_key = "c9d9e1cde8b54de786c94fcc0e5eae36"
+    a = mn
     params = {
         'KEY': service_key,
         'Type': 'json',
@@ -22,7 +23,7 @@ def fetch_meal_info(mn):
         'ATPT_OFCDC_SC_CODE': 'D10',
         'SD_SCHUL_CODE': '7240331',
         'MLSV_YMD': today, 
-        'MMEAL_SC_CODE': mn
+        'MMEAL_SC_CODE': '2'
     }
 
     try:
