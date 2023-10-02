@@ -1,3 +1,4 @@
+# 여기까지가 온전본
 from flask import Flask, jsonify
 import requests
 from datetime import date
