@@ -5,7 +5,7 @@ from datetime import date
 app = Flask(__name__)
 
 # 정보 가져오기
-def fetch_meal_info():
+def fetch_meal_info(mealname):
     
     #오늘 날짜 구하기
     #today = str(int(date.today().strftime("%Y%m%d")) + 4)
@@ -22,7 +22,7 @@ def fetch_meal_info():
         'ATPT_OFCDC_SC_CODE': 'D10',
         'SD_SCHUL_CODE': '7240331',
         'MLSV_YMD': today, 
-        'MMEAL_SC_CODE': '2'
+        'MMEAL_SC_CODE': mealname
     }
 
     try:
@@ -38,11 +38,25 @@ def fetch_meal_info():
          return {"error": str(e)}
 
 
-@app.route('/get_meal', methods=['POST'])
-def get_meal():
+@app.route('/get_breakfast', methods=['POST'])
+def get_breakfast() :
+    get_meal('1')
+    
+@app.route('/get_lunch', methods=['POST'])
+def get_lunch() :
+    get_meal('2')
+    
+@app.route('/get_dinner', methods=['POST'])
+def get_dinner() :
+    get_meal('3')
+
+
+
+
+def get_meal(mealname):
     
     # 정보를 가져오는 함수 호출
-    meal_info = fetch_meal_info()
+    meal_info = fetch_meal_info(mealname)
     
     if "error" in meal_info:
         # 에러 메시지가 있는 경우
