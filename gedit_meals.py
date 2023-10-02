@@ -5,6 +5,9 @@ from datetime import date
 
 app = Flask(__name__)
 
+
+
+
 # 정보 가져오기
 def fetch_meal_info():
     
@@ -39,8 +42,13 @@ def fetch_meal_info():
          return {"error": str(e)}
 
 
+
+
+
 @app.route('/get_meal', methods=['POST'])
 def get_meal():
+    
+    # 정보를 가져오는 함수 호출
     meal_info = fetch_meal_info()
     
     
@@ -60,9 +68,6 @@ def get_meal():
         }
 
     else:
-        
-        # 정보를 가져오는 함수 호출
-        meal_info = fetch_meal_info()
 
         # 메뉴 이름이 담긴 리스트를 개행 문자로 연결하여 하나의 문자열로 만듦.
         menu_str = "\n".join(meal_info["menu"])
