@@ -54,7 +54,9 @@ def fetch_meal_info(meal_code):
 def get_meal():
     
     #meal_code = request.json.get('meal_code')  # 'meal_code'에 해당하는 값 가져오기
-    meal_code = request.json['params']['meal_code']
+    #meal_code = request.json['params']['meal_code']
+    meal_code = request.json['action']['params']['meal_code']
+
     
     if meal_code is None:
         response_json ={
