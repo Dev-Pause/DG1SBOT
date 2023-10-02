@@ -24,7 +24,7 @@ def fetch_meal_info():
         'pSize': '100',
         'ATPT_OFCDC_SC_CODE': 'D10',
         'SD_SCHUL_CODE': '7240331',
-        'MLSV_YMD': today,
+        'MLSV_YMD': '20231018',
         'MMEAL_SC_CODE': '2'
     }
 
