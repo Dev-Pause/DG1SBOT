@@ -5,7 +5,7 @@ from datetime import date
 app = Flask(__name__)
 
 # 정보 가져오기
-def fetch_meal_info(mn):
+def fetch_meal_info():
     
     #오늘 날짜 구하기
     #today = str(int(date.today().strftime("%Y%m%d")) + 4)
@@ -14,7 +14,6 @@ def fetch_meal_info(mn):
     # API 엔드포인트 및 파라미터 설정
     url = "https://open.neis.go.kr/hub/mealServiceDietInfo"
     service_key = "c9d9e1cde8b54de786c94fcc0e5eae36"
-    a = mn
     params = {
         'KEY': service_key,
         'Type': 'json',
@@ -22,7 +21,7 @@ def fetch_meal_info(mn):
         'pSize': '100',
         'ATPT_OFCDC_SC_CODE': 'D10',
         'SD_SCHUL_CODE': '7240331',
-        'MLSV_YMD': 20230921,
+        'MLSV_YMD': today, 
         'MMEAL_SC_CODE': '2'
     }
 
@@ -39,23 +38,12 @@ def fetch_meal_info(mn):
          return {"error": str(e)}
 
 
-@app.route('/get_breakfast', methods=['POST'])
-def get_breakfast() :
-    return get_meal('1')
-    
-@app.route('/get_lunch', methods=['POST'])
-def get_lunch() :
-    return get_meal('2')
-    
-@app.route('/get_dinner', methods=['POST'])
-def get_dinner() :
-    return get_meal('3')
+@app.route('/get_meal', methods=['POST'])
 
-
-def get_meal(mealname):
+def get_meal():
     
     # 정보를 가져오는 함수 호출
-    meal_info = fetch_meal_info(mealname)
+    meal_info = fetch_meal_info()
     
     if "error" in meal_info:
         # 에러 메시지가 있는 경우
@@ -75,7 +63,7 @@ def get_meal(mealname):
     else:
 
         # 메뉴 이름이 담긴 리스트를 개행 문자로 연결하여 하나의 문자열로 만듦.
-        menu_str = '\n'.join(meal_info['menu'])
+        menu_str = "\n".join(meal_info["menu"])
 
         # 카카오 i 오픈빌더 응답 형식에 맞춰 JSON 응답 생성.
         response_json ={
