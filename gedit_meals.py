@@ -34,8 +34,11 @@ def fetch_meal_info():
             return {"menu": meal_names}
         else:
             return {"error": "Failed to fetch meal information."}
-    except Exception as e:
-         return {"error": str(e), "menu": []}
+    
+    except Exception :
+        return {"급식정보가 없습니다"}
+    #except Exception as e:
+         #return {"error": str(e), "menu": []}
 
 
 @app.route('/get_meal', methods=['POST'])
