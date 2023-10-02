@@ -80,7 +80,7 @@ def get_meal():
                     "outputs":[ 
                         {
                             "simpleText" : {
-                                "text" : "Additional request ignored."
+                                "text" : "한번에 많은 요청을 보내지 마세요"
                             }
                         }
                     ]
