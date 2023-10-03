@@ -3,7 +3,7 @@
 
 from flask import Flask, jsonify, request
 import requests
-from datetime import date
+from datetime import date, datetime
 import time
 import pytz
 
