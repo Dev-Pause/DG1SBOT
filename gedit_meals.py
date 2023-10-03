@@ -5,6 +5,7 @@ from flask import Flask, jsonify, request
 import requests
 from datetime import date
 import time
+import pytz
 
 app = Flask(__name__)
 
@@ -15,10 +16,19 @@ request_history = {}
 threshold = 2
 
 
+# 현재 날짜와 시간 가져오기
+now = datetime.datetime.now()
+# 한국 표준시 타임존 설정
+korea_timezone = pytz.timezone('Asia/Seoul')
+# 한국 표준시로 변환
+korea_time = now.astimezone(korea_timezone)
+
+
+
 # 정보 가져오기
 def fetch_meal_info(meal_code):
-    # 오늘 날짜 구하기
-    today = date.today().strftime("%Y%m%d")
+    # 오늘 날짜 계산 (YYYYMMDD 형식)
+    today = korea_time.strftime("%Y%m%d")
 
     # API 엔드포인트 및 파라미터 설정
     url = "https://open.neis.go.kr/hub/mealServiceDietInfo"
