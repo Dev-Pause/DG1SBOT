@@ -17,7 +17,7 @@ threshold = 2
 
 
 # 현재 날짜와 시간 가져오기
-now = datetime.datetime.now()
+now = datetime.now()
 # 한국 표준시 타임존 설정
 korea_timezone = pytz.timezone('Asia/Seoul')
 # 한국 표준시로 변환
