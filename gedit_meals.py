@@ -56,8 +56,15 @@ def fetch_meal_info(meal_code):
         if response.status_code == 200:
             data = response.json()
             meals = data['mealServiceDietInfo'][1]['row']
-            meal_names = [meal.get('DDISH_NM', '') for meal in meals]
-            return {"menu": meal_names}
+            menu_list = []
+            
+            for meal in meals:
+                menu_name = meal.get('DDISH_NM', '')
+                # 알레르기 정보 제거하여 메뉴만 추출
+                menu_name_without_allergy = menu_name.split("(")[0].strip()
+                menu_list.append(menu_name_without_allergy)
+                
+            return {"menu": menu_list}
         
         return {"error": "Failed to fetch meal information."}
         
