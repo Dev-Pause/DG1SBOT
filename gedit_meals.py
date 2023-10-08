@@ -46,7 +46,7 @@ def fetch_meal_info(meal_code):
         'pSize': '100',
         'ATPT_OFCDC_SC_CODE': 'D10',
         'SD_SCHUL_CODE': '7240331',
-        'MLSV_YMD': '20230821',#str(today),
+        'MLSV_YMD': str(today),
         'MMEAL_SC_CODE': meal_code_mapping.get(meal_code)
     }
 
